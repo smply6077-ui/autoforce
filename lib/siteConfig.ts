@@ -8,11 +8,11 @@ export const siteConfig = {
   name: 'Autoparts Shop',
 
   // Contacte
-  phone: '+37360275222',
-  phoneDisplay: '+373 60 27 52 22',
-  telegramUrl: 'https://t.me/+37360275222',
-  address: 'Strada Meșterul Manole 18, Chișinău, Moldova',
-  hours: 'Luni–Vineri, 9:00–18:00',
+  phone: '+37360331941',
+  phoneDisplay: '+373 60 33 19 41',
+  telegramUrl: 'https://t.me/+37360331941',
+  address: 'Strada Meșterul Manole 18/2, Chișinău, Moldova',
+  hours: 'Luni–Vineri, 10:00–18:00',
 
   // Imaginea mare din pagina principală (poți pune orice URL de imagine)
   heroImageUrl:

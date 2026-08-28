@@ -55,8 +55,8 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* CATEGORII - rand de iconite, ca in poza */}
-      <section className="max-w-6xl mx-auto px-4 pb-14">
+      {/* CATEGORII - poze reale de produse, ca in poza de referinta */}
+      <section className="max-w-6xl mx-auto px-4 pb-10">
         <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-7 gap-4">
           {categories.map((cat) => {
             const Icon = getCategoryIcon(cat.slug);
@@ -64,15 +64,59 @@ export default async function HomePage() {
               <Link
                 key={cat.id}
                 href={`/product-category/${cat.slug}`}
-                className="flex flex-col items-center gap-2 border rounded-lg p-4 hover:border-brand hover:shadow-sm transition-all text-center"
+                className="flex flex-col items-center gap-2 group"
               >
-                <Icon size={28} className="text-brand" />
-                <span className="text-xs font-semibold uppercase">{cat.name}</span>
+                <div className="w-full aspect-square bg-gray-50 rounded-lg flex items-center justify-center overflow-hidden relative group-hover:shadow-md transition-shadow">
+                  {cat.icon_url ? (
+                    <Image
+                      src={cat.icon_url}
+                      alt={cat.name}
+                      fill
+                      className="object-contain p-4"
+                    />
+                  ) : (
+                    <Icon size={32} className="text-brand" />
+                  )}
+                </div>
+                <span className="text-xs font-semibold uppercase text-center">{cat.name}</span>
               </Link>
             );
           })}
         </div>
       </section>
+
+      {/* BANNERE PROMO */}
+      {siteConfig.banners.some((b) => b.imageUrl) && (
+        <section className="max-w-6xl mx-auto px-4 pb-14">
+          <div className="grid md:grid-cols-2 gap-4">
+            {siteConfig.banners
+              .filter((b) => b.imageUrl)
+              .map((banner, i) => (
+                <Link
+                  key={i}
+                  href={banner.linkHref}
+                  className="relative aspect-[21/9] rounded-lg overflow-hidden group"
+                >
+                  <Image
+                    src={banner.imageUrl}
+                    alt={banner.title}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform"
+                  />
+                  <div className="absolute inset-0 bg-black/40 flex flex-col justify-center px-6 text-white">
+                    <p className="text-sm font-medium text-brand">{banner.subtitle}</p>
+                    <h3 className="text-xl font-bold mt-1">{banner.title}</h3>
+                    {banner.price && (
+                      <span className="mt-2 inline-block bg-brand text-white text-sm font-bold px-3 py-1 rounded w-fit">
+                        {banner.price}
+                      </span>
+                    )}
+                  </div>
+                </Link>
+              ))}
+          </div>
+        </section>
+      )}
 
       {/* PRODUSE RECOMANDATE */}
       <section className="max-w-6xl mx-auto px-4 pb-16">
